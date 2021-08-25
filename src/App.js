@@ -1,5 +1,8 @@
-import './App.css'
+import './index.css'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
+import Movies from './components/Movies'
+import Sidebar from './components/Sidebar'
 
 const App = () => {
   const [movies, setMovies] = useState([])
@@ -8,24 +11,28 @@ const App = () => {
     getMovies()
   }, [])
 
-  const getMovies = async () =>
-    await fetch(
-      'https://api.themoviedb.org/discover/movie?sort_by=popularity.desc?api_key=09a80f289e2586f012a2f37a412e256a'
+  const getMovies = async () => {
+    const { data } = await axios.get(
+      'https://api.themoviedb.org/3/trending/all/day?api_key=09a80f289e2586f012a2f37a412e256a'
     )
-      .then((response) => response.json())
-      .then((response) => setMovies(response.results))
-      .catch((error) => console.log(error))
-
+    setMovies(data.results)
+    console.log(data)
+  }
   return (
     //map movies from useState
     <div className="App">
       <div>
-        <h1>Movies</h1>
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie.id}>{movie.title}</li>
-          ))}
-        </ul>
+        <Sidebar />
+      </div>
+      <div>
+        <div className="search-bar">
+          <input className="search" type="text" placeholder="Search a movie" />
+        </div>
+        <div className="container">
+          <div className="movies">
+            <Movies movies={movies} />
+          </div>
+        </div>
       </div>
     </div>
   )
