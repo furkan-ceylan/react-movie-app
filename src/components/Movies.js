@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Movies = ({ movies }) => {
   return (
     <div>
-      <h3 className="movies-title">Popular Movies</h3>
-      <ul>
+      <h2 className="movies-title">Popular Movies</h2>
+      <div className="movies">
         {movies.map((movie) => (
-          <li key={movie.id}>
-            {movie.title ? movie.title : movie.name}
-            <img
-              src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-              alt={movie.title}
-            />
-          </li>
+          <Link to={`/movie/${movie.id}`}>
+            <div className="movie">
+              <img
+                src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+                alt={movie.title}
+              />
+              <p>{movie.title ? movie.title : movie.name}</p>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }
