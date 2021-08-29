@@ -5,9 +5,13 @@ const MovieSingle = ({ movie }) => {
   return (
     <div>
       <Link to={`/movie/${movie.id}`} key={movie.id}>
-        <div className="movie">
+        <div className="movie" key={movie.id}>
           <img
-            src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
+                : `https://via.placeholder.com/300x450`
+            }
             alt={movie.title}
           />
           <p>{movie.title ? movie.title : movie.name}</p>

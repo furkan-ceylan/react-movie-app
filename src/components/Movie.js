@@ -8,6 +8,7 @@ const Movie = ({ match }) => {
   const [movie, setMovie] = useState([])
 
   useEffect(() => {
+    window.scroll(0, 0)
     getMovie()
   }, [])
 
@@ -19,10 +20,14 @@ const Movie = ({ match }) => {
     console.log(data)
   }
   return (
-    <div className="movie-single">
+    <div className="movie-single" key={movie.id}>
       <div>
         <img
-          src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
+              : `https://via.placeholder.com/300x450`
+          }
           alt={movie.title}
         />
       </div>
