@@ -20,9 +20,6 @@ const UpcomingMovies = () => {
   return (
     <div>
       <div className="container">
-        <div className="search-bar">
-          <input className="search" type="text" placeholder="Search a movie" />
-        </div>
         <div className="movies-all">
           <h2 className="movies-title">Upcoming Movies</h2>
           <div className="movies">
