@@ -4,6 +4,7 @@ import TopRatedMovies from './components/TopRatedMovies'
 import UpcomingMovies from './components/UpcomingMovies'
 import Movie from './components/Movie'
 import Sidebar from './components/Sidebar'
+import Search from './components/Search'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 const App = () => {
@@ -11,12 +12,16 @@ const App = () => {
     <Router>
       <div className="App">
         <Sidebar />
-        <Switch>
-          <Route exact path="/" component={PopularMovies} />
-          <Route exact path="/top-rated" component={TopRatedMovies} />
-          <Route exact path="/upcoming" component={UpcomingMovies} />
-          <Route path="/movie/:id" component={Movie} />
-        </Switch>
+        <div>
+          <Search />
+          <Switch>
+            <Route exact path="/" component={PopularMovies} />
+            <Route exact path="/top-rated" component={TopRatedMovies} />
+            <Route exact path="/upcoming" component={UpcomingMovies} />
+            <Route exact path="/search-results" component={Search} />
+            <Route path="/movie/:id" component={Movie} />
+          </Switch>
+        </div>
       </div>
     </Router>
   )
