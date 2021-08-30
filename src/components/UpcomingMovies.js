@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import MovieSingle from './MovieSingle'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import Loader from 'react-loader-spinner'
 
 const UpcomingMovies = () => {
   const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getMovies()
@@ -14,6 +17,7 @@ const UpcomingMovies = () => {
       'http://api.themoviedb.org/3/movie/upcoming?api_key=09a80f289e2586f012a2f37a412e256a'
     )
     setMovies(data.results)
+    setLoading(false)
     console.log(data)
   }
 
@@ -23,9 +27,13 @@ const UpcomingMovies = () => {
         <div className="movies-all">
           <h2 className="movies-title">Upcoming Movies</h2>
           <div className="movies">
-            {movies.map((movie) => (
-              <MovieSingle movie={movie} key={movie.id} />
-            ))}
+            {loading === true ? (
+              <Loader type="Bars" color="#fff" height={100} width={100} />
+            ) : (
+              movies.map((movie) => (
+                <MovieSingle movie={movie} key={movie.id} />
+              ))
+            )}
           </div>
         </div>
       </div>

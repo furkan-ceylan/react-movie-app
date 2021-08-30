@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom'
 
 const Sidebar = () => {
   const location = useLocation()
-  console.log(location)
 
   return (
     <div className="sidebar">
